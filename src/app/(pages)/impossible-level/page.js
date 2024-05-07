@@ -216,7 +216,7 @@ const ImpossibleLevel = () => {
                 <div className="flex sm:flex-row flex-col justify-center items-center sm:justify-around py-10">
                     <div>
                         <h1 className="text-4xl">Your Score is: {scoreCount}</h1>
-                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the Impossible level and also you have fineshed all the level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
+                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you have completed the Impossible level and also you have fineshed all the level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
                     </div>
                     <div className={`flex flex-col gap-y-2 justify-center ${floorCount === 1 ? 'visible' : 'hidden duration-1000'}`}>
                         <h1>1st Floor</h1>
@@ -261,7 +261,7 @@ const ImpossibleLevel = () => {
                         {selectedBox2 && <p> You have selected {selectedBox2}</p>}
                         {boxContent2.length < 1 ? null :
                             <div>
-                                {boxContent2 === "Bomb" ? <p className="text-red-600">Sorry!! You lost the game.</p> : <p className="text-green-600">Congratulation!! Your reached 3rd floor.</p>}
+                                {boxContent2 === "Bomb" ? <p className="text-red-600">Sorry!! You lost the game.</p> : <p className="text-green-600">Congratulation!! You have reached 3rd floor.</p>}
                             </div>
                         }
                     </div>
@@ -270,7 +270,7 @@ const ImpossibleLevel = () => {
                         {selectedBox && <p> You have selected {selectedBox}</p>}
                         {boxContent.length < 1 ? null :
                             <div>
-                                {boxContent === "Bomb" ? <p className="text-red-600">Sorry!! You lost the game.</p> : <p className="text-green-600">Congratulation!! Your reached 2nd floor.</p>}
+                                {boxContent === "Bomb" ? <p className="text-red-600">Sorry!! You lost the game.</p> : <p className="text-green-600">Congratulation!! You have reached 2nd floor.</p>}
                             </div>
                         }
                     </div>
