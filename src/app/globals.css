@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.box, .box2, .box3{
+  /* background-color: white; */
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  perspective: 1000px; /* Adding perspective for 3D effect */
+  transition: transform 0.5s;
+  color: white;
+}
+
+.content, .content2, .content3 {
+  transition: transform 0.5s;
+}
+
+.flipped, .flipped2, .flipped3 {
+  transform: rotateY(180deg); /* Rotate entire box */
+}
+
+.flipped .content, .flipped2 .content2, .flipped3 .content3 {
+  transform: rotateY(180deg); /* Only rotate content when box is flipped */
+}
