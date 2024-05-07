@@ -1,7 +1,8 @@
 'use client'
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
-const NormalLevel = () => {
+const MediumLevel = () => {
     const [scoreCount, setScoreCount] = useState(0);
     const [floorCount, setFloorCount] = useState(1);
     const [selectedBox, setSelectedBox] = useState(null);
@@ -11,7 +12,6 @@ const NormalLevel = () => {
         { name: 'Box1', content: 'Gem' },
         { name: 'Box2', content: 'Gem' },
         { name: 'Box3', content: 'Gem' },
-        { name: 'Box4', content: 'Gem' }
     ]);
 
     // Function to shuffle an array
@@ -38,7 +38,6 @@ const NormalLevel = () => {
         { name2: 'Box1', content2: 'Gem' },
         { name2: 'Box2', content2: 'Gem' },
         { name2: 'Box3', content2: 'Gem' },
-        { name2: 'Box4', content2: 'Gem' }
     ]);
 
 
@@ -66,7 +65,6 @@ const NormalLevel = () => {
         { name3: 'Box2', content3: 'Gem' },
         { name3: 'Box1', content3: 'Gem' },
         { name3: 'Box3', content3: 'Gem' },
-        { name3: 'Box4', content3: 'Gem' }
     ]);
     // Function to shuffle an array
     const shuffleArray3 = (array3) => {
@@ -151,18 +149,18 @@ const NormalLevel = () => {
         <>
             <section className="bg-gray-700 h-screen text-white ps-20">
                 <h1 className="text-center font-bold text-2xl pt-5">TOWER-QUEST</h1>
-                <h1 className="text-center font-bold text-lg pt-5">NORMAL LEVEL</h1>
+                <h1 className="text-center font-bold text-lg pt-5">Medium Level</h1>
                 <div className="flex items-center justify-around py-10">
                     <div>
                         <h1 className="text-4xl">Your Score is: {scoreCount}</h1>
-                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the normal level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
+                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the medium level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
                     </div>
                     <div className={`flex flex-col gap-y-2 justify-center ${floorCount === 1 ? 'visible' : 'hidden duration-1000'}`}>
                         <h1>1st Floor</h1>
                         {boxes.map((box, index) => {
                             return (
                                 <>
-                                    <div key={index} onClick={() => handleBoxClick(index, box)} className={`box ${index === flippedBox ? 'flipped' : ''} ${index === flippedBox && box.content === "Bomb" ? 'bg-red-500' : 'bg-green-500'} ${index === flippedBox ? '' : 'bg-gray-600'}`}>
+                                    <div key={index} onClick={() => handleBoxClick(index, box)} className={`box ${index === flippedBox ? 'flipped' : ''} ${index === flippedBox && box.content === "Bomb" ? 'bg-red-500' : 'bg-green-500'} ${index === flippedBox ? '' : 'bg-indigo-500'}`}>
                                         <div className="content">{index === flippedBox ? box.content : box.name}</div>
                                     </div>
                                 </>
@@ -176,7 +174,7 @@ const NormalLevel = () => {
                         {boxes2.map((box2, index2) => {
                             return (
                                 <>
-                                    <div key={index2} onClick={() => handleBoxClick2(index2, box2)} className={`box2 ${index2 === flippedBox2 ? 'flipped2' : ''} ${index2 === flippedBox2 && box2.content2 === "Bomb" ? 'bg-red-500' : 'bg-green-500'} ${index2 === flippedBox2 ? '' : 'bg-gray-600'}`}>
+                                    <div key={index2} onClick={() => handleBoxClick2(index2, box2)} className={`box2 ${index2 === flippedBox2 ? 'flipped2' : ''} ${index2 === flippedBox2 && box2.content2 === "Bomb" ? 'bg-red-500' : 'bg-green-500'} ${index2 === flippedBox2 ? '' : 'bg-indigo-500'}`}>
                                         <div className="content2">{index2 === flippedBox2 ? box2.content2 : box2.name2}</div>
                                     </div>
                                 </>
@@ -188,7 +186,7 @@ const NormalLevel = () => {
                         {boxes3.map((box3, index3) => {
                             return (
                                 <>
-                                    <div key={index3} onClick={() => handleBoxClick3(index3, box3)} className={`box3 ${index3 === flippedBox3 ? 'flipped3' : ''} ${index3 === flippedBox3 && box3.content3 === "Bomb" ? 'bg-red-500' : 'bg-green-500'} ${index3 === flippedBox3 ? '' : 'bg-gray-600'}`}>
+                                    <div key={index3} onClick={() => handleBoxClick3(index3, box3)} className={`box3 ${index3 === flippedBox3 ? 'flipped3' : ''} ${index3 === flippedBox3 && box3.content3 === "Bomb" ? 'bg-red-500' : 'bg-green-500'} ${index3 === flippedBox3 ? '' : 'bg-indigo-500'}`}>
                                         <div className="content3">{index3 === flippedBox3 ? box3.content3 : box3.name3}</div>
                                     </div>
                                 </>
@@ -213,11 +211,11 @@ const NormalLevel = () => {
                             </div>
                         }
                     </div>
-
                 </div>
+                <Link href='/'>Back to home page</Link>
             </section>
         </>
     );
 }
 
-export default NormalLevel
+export default MediumLevel
