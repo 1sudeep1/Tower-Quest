@@ -44,12 +44,12 @@ const NormalLevel = () => {
 
 
     // Function to shuffle an array
-    const shuffleArray2 = (array2) => {
-        for (let i = array2.length - 1; i > 0; i--) {
+    const shuffleArray2 = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [array2[i], array2[j]] = [array2[j], array2[i]];
+            [array[i], array[j]] = [array[j], array[i]];
         }
-        return array2;
+        return array;
     };
 
     // Function to handle box click
@@ -70,12 +70,12 @@ const NormalLevel = () => {
         { name3: 'Box4', content3: 'Gem' }
     ]);
     // Function to shuffle an array
-    const shuffleArray3 = (array3) => {
-        for (let i = array3.length - 1; i > 0; i--) {
+    const shuffleArray3 = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [array3[i], array3[j]] = [array3[j], array3[i]];
+            [array[i], array[j]] = [array[j], array[i]];
         }
-        return array3;
+        return array;
     };
 
     // Function to handle box click

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-const MediumLevel = () => {
+const HardLevel = () => {
     const [scoreCount, setScoreCount] = useState(0);
     const [floorCount, setFloorCount] = useState(1);
     const [selectedBox, setSelectedBox] = useState(null);
@@ -16,9 +16,31 @@ const MediumLevel = () => {
 
     // Function to shuffle an array
     const shuffleArray = (array) => {
+        const numberOfBombs = 2; // Number of boxes containing bombs
+        const numberOfGems = 1; // Number of boxes containing gems
+        let bombCount = 0;
+        let gemCount = 0;
+    
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
+    
+            // Update the content of the boxes
+            if (array[j].content === 'Bomb') {
+                if (bombCount < numberOfBombs) {
+                    bombCount++;
+                } else {
+                    array[j].content = 'Gem';
+                    gemCount++;
+                }
+            } else if (array[j].content === 'Gem') {
+                if (gemCount < numberOfGems) {
+                    gemCount++;
+                } else {
+                    array[j].content = 'Bomb';
+                    bombCount++;
+                }
+            }
         }
         return array;
     };
@@ -43,9 +65,31 @@ const MediumLevel = () => {
 
     // Function to shuffle an array
     const shuffleArray2 = (array) => {
+        const numberOfBombs = 2; // Number of boxes containing bombs
+        const numberOfGems = 1; // Number of boxes containing gems
+        let bombCount = 0;
+        let gemCount = 0;
+    
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
+    
+            // Update the content of the boxes
+            if (array[j].content === 'Bomb') {
+                if (bombCount < numberOfBombs) {
+                    bombCount++;
+                } else {
+                    array[j].content = 'Gem';
+                    gemCount++;
+                }
+            } else if (array[j].content === 'Gem') {
+                if (gemCount < numberOfGems) {
+                    gemCount++;
+                } else {
+                    array[j].content = 'Bomb';
+                    bombCount++;
+                }
+            }
         }
         return array;
     };
@@ -68,9 +112,31 @@ const MediumLevel = () => {
     ]);
     // Function to shuffle an array
     const shuffleArray3 = (array) => {
+        const numberOfBombs = 2; // Number of boxes containing bombs
+        const numberOfGems = 1; // Number of boxes containing gems
+        let bombCount = 0;
+        let gemCount = 0;
+    
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
+    
+            // Update the content of the boxes
+            if (array[j].content === 'Bomb') {
+                if (bombCount < numberOfBombs) {
+                    bombCount++;
+                } else {
+                    array[j].content = 'Gem';
+                    gemCount++;
+                }
+            } else if (array[j].content === 'Gem') {
+                if (gemCount < numberOfGems) {
+                    gemCount++;
+                } else {
+                    array[j].content = 'Bomb';
+                    bombCount++;
+                }
+            }
         }
         return array;
     };
@@ -149,7 +215,7 @@ const MediumLevel = () => {
         <>
             <section className="bg-gray-700 h-screen text-white ps-20">
                 <h1 className="text-center font-bold text-2xl pt-5">TOWER-QUEST</h1>
-                <h1 className="text-center font-bold text-lg pt-5">Medium Level</h1>
+                <h1 className="text-center font-bold text-lg pt-5">Hard Level</h1>
                 <div className="flex items-center justify-around py-10">
                     <div>
                         <h1 className="text-4xl">Your Score is: {scoreCount}</h1>
@@ -218,4 +284,4 @@ const MediumLevel = () => {
     );
 }
 
-export default MediumLevel
+export default HardLevel
