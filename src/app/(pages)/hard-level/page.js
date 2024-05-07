@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const HardLevel = () => {
+    const [redirect, setRedirect] = useState(false);
     const [scoreCount, setScoreCount] = useState(0);
     const [floorCount, setFloorCount] = useState(1);
     const [selectedBox, setSelectedBox] = useState(null);
@@ -20,11 +21,11 @@ const HardLevel = () => {
         const numberOfGems = 1; // Number of boxes containing gems
         let bombCount = 0;
         let gemCount = 0;
-    
+
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
-    
+
             // Update the content of the boxes
             if (array[j].content === 'Bomb') {
                 if (bombCount < numberOfBombs) {
@@ -69,11 +70,11 @@ const HardLevel = () => {
         const numberOfGems = 1; // Number of boxes containing gems
         let bombCount = 0;
         let gemCount = 0;
-    
+
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
-    
+
             // Update the content of the boxes
             if (array[j].content === 'Bomb') {
                 if (bombCount < numberOfBombs) {
@@ -116,11 +117,11 @@ const HardLevel = () => {
         const numberOfGems = 1; // Number of boxes containing gems
         let bombCount = 0;
         let gemCount = 0;
-    
+
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
-    
+
             // Update the content of the boxes
             if (array[j].content === 'Bomb') {
                 if (bombCount < numberOfBombs) {
@@ -211,15 +212,31 @@ const HardLevel = () => {
         // Clean up the timeout to avoid memory leaks
         return () => clearTimeout(timeout);
     }, [boxContent, boxContent2, boxContent3]);
+
+    useEffect(() => {
+        if (scoreCount === 30) {
+            setRedirect(true);
+        }
+    }, [scoreCount]);
+
+    useEffect(() => {
+        if (redirect) {
+            const timeoutId = setTimeout(() => {
+                window.location.href = "/impossible-level";
+            }, 3000);
+            return () => clearTimeout(timeoutId);
+
+        }
+    }, [redirect]);
     return (
         <>
-            <section className="bg-gray-700 h-screen text-white ps-20">
+            <section className="bg-gray-700 lg:h-screen pb-5 text-white sm:ps-20">
                 <h1 className="text-center font-bold text-2xl pt-5">TOWER-QUEST</h1>
                 <h1 className="text-center font-bold text-lg pt-5">Hard Level</h1>
-                <div className="flex items-center justify-around py-10">
+                <div className="flex sm:flex-row flex-col justify-center items-center sm:justify-around py-10">
                     <div>
                         <h1 className="text-4xl">Your Score is: {scoreCount}</h1>
-                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the medium level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
+                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the hard level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
                     </div>
                     <div className={`flex flex-col gap-y-2 justify-center ${floorCount === 1 ? 'visible' : 'hidden duration-1000'}`}>
                         <h1>1st Floor</h1>
@@ -278,7 +295,13 @@ const HardLevel = () => {
                         }
                     </div>
                 </div>
-                <Link href='/'>Back to home page</Link>
+                <div className="flex sm:flex-row flex-col items-center gap-2 mb-2">
+                    <Link href='/normal-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Normal</Link>
+                    <Link href='/medium-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Medium</Link>
+                    <Link href='/hard-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Hard</Link>
+                    <Link href='/impossible-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Impossible</Link>
+                    <Link href='/' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Back to home</Link>
+                </div>
             </section>
         </>
     );

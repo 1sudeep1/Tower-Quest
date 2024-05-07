@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-const MediumLevel = () => {
+const ImpossibleLevel = () => {
     const [redirect, setRedirect] = useState(false);
     const [scoreCount, setScoreCount] = useState(0);
     const [floorCount, setFloorCount] = useState(1);
@@ -13,16 +13,31 @@ const MediumLevel = () => {
         { name: 'Box1', content: 'Gem' },
         { name: 'Box2', content: 'Gem' },
         { name: 'Box3', content: 'Gem' },
+        { name: 'Box4', content: 'Gem' }
     ]);
 
     // Function to shuffle an array
     const shuffleArray = (array) => {
+        const gemIndex = Math.floor(Math.random() * array.length);
+
+        // Ensure that only one box contains a gem
+        for (let i = 0; i < array.length; i++) {
+            if (i === gemIndex) {
+                array[i].content = 'Gem';
+            } else {
+                array[i].content = 'Bomb';
+            }
+        }
+
+        // Shuffle the array
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
+
         return array;
     };
+
 
     // Function to handle box click
     const handleBoxClick = (index, box) => {
@@ -39,17 +54,32 @@ const MediumLevel = () => {
         { name2: 'Box1', content2: 'Gem' },
         { name2: 'Box2', content2: 'Gem' },
         { name2: 'Box3', content2: 'Gem' },
+        { name2: 'Box4', content2: 'Gem' }
     ]);
 
 
     // Function to shuffle an array
     const shuffleArray2 = (array) => {
+        const gemIndex = Math.floor(Math.random() * array.length);
+
+        // Ensure that only one box contains a gem
+        for (let i = 0; i < array.length; i++) {
+            if (i === gemIndex) {
+                array[i].content = 'Gem';
+            } else {
+                array[i].content = 'Bomb';
+            }
+        }
+
+        // Shuffle the array
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
+
         return array;
     };
+
 
     // Function to handle box click
     const handleBoxClick2 = (index2, box2) => {
@@ -66,15 +96,30 @@ const MediumLevel = () => {
         { name3: 'Box2', content3: 'Gem' },
         { name3: 'Box1', content3: 'Gem' },
         { name3: 'Box3', content3: 'Gem' },
+        { name3: 'Box4', content3: 'Gem' }
     ]);
     // Function to shuffle an array
     const shuffleArray3 = (array) => {
+        const gemIndex = Math.floor(Math.random() * array.length);
+
+        // Ensure that only one box contains a gem
+        for (let i = 0; i < array.length; i++) {
+            if (i === gemIndex) {
+                array[i].content = 'Gem';
+            } else {
+                array[i].content = 'Bomb';
+            }
+        }
+
+        // Shuffle the array
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
+
         return array;
     };
+
 
     // Function to handle box click
     const handleBoxClick3 = (index3, box3) => {
@@ -156,21 +201,22 @@ const MediumLevel = () => {
     useEffect(() => {
         if (redirect) {
             const timeoutId = setTimeout(() => {
-                window.location.href = "/hard-level";
+                window.location.href = "/";
             }, 3000);
             return () => clearTimeout(timeoutId);
 
         }
     }, [redirect]);
+
     return (
         <>
-            <section className="bg-gray-700 lg:h-screen text-white pb-5 sm:ps-20">
+            <section className="bg-gray-700 lg:h-screen pb-5 text-white sm:ps-20">
                 <h1 className="text-center font-bold text-2xl pt-5">TOWER-QUEST</h1>
-                <h1 className="text-center font-bold text-lg pt-5">Medium Level</h1>
+                <h1 className="text-center font-bold text-lg pt-5">Impossible Level</h1>
                 <div className="flex sm:flex-row flex-col justify-center items-center sm:justify-around py-10">
                     <div>
                         <h1 className="text-4xl">Your Score is: {scoreCount}</h1>
-                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the medium level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
+                        {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the Impossible level and also you have fineshed all the level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
                     </div>
                     <div className={`flex flex-col gap-y-2 justify-center ${floorCount === 1 ? 'visible' : 'hidden duration-1000'}`}>
                         <h1>1st Floor</h1>
@@ -236,9 +282,10 @@ const MediumLevel = () => {
                     <Link href='/impossible-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Impossible</Link>
                     <Link href='/' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Back to home</Link>
                 </div>
+
             </section>
         </>
     );
 }
 
-export default MediumLevel
+export default ImpossibleLevel

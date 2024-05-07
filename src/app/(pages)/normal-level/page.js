@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const NormalLevel = () => {
+    const [redirect, setRedirect] = useState(false);
     const [scoreCount, setScoreCount] = useState(0);
     const [floorCount, setFloorCount] = useState(1);
     const [selectedBox, setSelectedBox] = useState(null);
@@ -148,12 +149,28 @@ const NormalLevel = () => {
         // Clean up the timeout to avoid memory leaks
         return () => clearTimeout(timeout);
     }, [boxContent, boxContent2, boxContent3]);
+
+    useEffect(() => {
+        if (scoreCount === 30) {
+            setRedirect(true);
+        }
+    }, [scoreCount]);
+
+    useEffect(() => {
+        if (redirect) {
+            const timeoutId = setTimeout(() => {
+                window.location.href = "/medium-level";
+            }, 3000);
+            return () => clearTimeout(timeoutId);
+
+        }
+    }, [redirect]);
     return (
         <>
-            <section className="bg-gray-700 h-screen text-white ps-20">
+            <section className="bg-gray-700 lg:h-screen pb-5 text-white sm:ps-20">
                 <h1 className="text-center font-bold text-2xl pt-5">TOWER-QUEST</h1>
                 <h1 className="text-center font-bold text-lg pt-5">Normal Level</h1>
-                <div className="flex items-center justify-around py-10">
+                <div className="flex sm:flex-row flex-col justify-center items-center sm:justify-around py-10">
                     <div>
                         <h1 className="text-4xl">Your Score is: {scoreCount}</h1>
                         {floorCount === 4 ? <h1>{scoreCount === 30 ? 'Congratulation!! you completed the normal level' : 'Sorry!! Not enough score. Please try again.'}</h1> : null}
@@ -215,7 +232,13 @@ const NormalLevel = () => {
                         }
                     </div>
                 </div>
-                <Link href='/'>Back to home page</Link>
+                <div className="flex sm:flex-row flex-col items-center gap-2 mb-2">
+                    <Link href='/normal-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Normal</Link>
+                    <Link href='/medium-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Medium</Link>
+                    <Link href='/hard-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Hard</Link>
+                    <Link href='/impossible-level' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Impossible</Link>
+                    <Link href='/' className="text-white bg-gray-500 border-0 px-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Back to home</Link>
+                </div>
             </section>
         </>
     );
